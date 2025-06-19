@@ -1,0 +1,29 @@
+services:
+  payload:
+    container_name: asset_manager_payload
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URI}
+      NODE_ENV: production
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: asset_manager_db
+    image: postgres:17-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
