@@ -1,7 +1,7 @@
 {
   "name": "asset-manager",
   "version": "1.0.0",
-  "description": "A blank template to get started with Payload 3.0",
+  "description": "Manage your assets.",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -21,6 +21,7 @@
     "@payloadcms/richtext-lexical": "3.43.0",
     "@payloadcms/ui": "3.43.0",
     "@tailwindcss/postcss": "^4.1.10",
+    "@zxing/browser": "^0.1.5",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.3.0",

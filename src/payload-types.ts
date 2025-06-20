@@ -68,7 +68,6 @@ export interface Config {
   blocks: {};
   collections: {
     assets: Asset;
-    barcodes: Barcode;
     locations: Location;
     media: Media;
     users: User;
@@ -79,7 +78,6 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     assets: AssetsSelect<false> | AssetsSelect<true>;
-    barcodes: BarcodesSelect<false> | BarcodesSelect<true>;
     locations: LocationsSelect<false> | LocationsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -136,6 +134,15 @@ export interface Asset {
         serialNumber?: string | null;
         modelNumber?: string | null;
         macAddress?: string | null;
+        barcodeScan?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -193,27 +200,6 @@ export interface Location {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "barcodes".
- */
-export interface Barcode {
-  id: number;
-  asset: number | Asset;
-  barcodeType?: ('one' | 'two') | null;
-  barcodeData: string;
-  metadata?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -222,10 +208,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'assets';
         value: number | Asset;
-      } | null)
-    | ({
-        relationTo: 'barcodes';
-        value: number | Barcode;
       } | null)
     | ({
         relationTo: 'locations';
@@ -298,22 +280,11 @@ export interface AssetsSelect<T extends boolean = true> {
         serialNumber?: T;
         modelNumber?: T;
         macAddress?: T;
+        barcodeScan?: T;
         id?: T;
       };
   owner?: T;
   location?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "barcodes_select".
- */
-export interface BarcodesSelect<T extends boolean = true> {
-  asset?: T;
-  barcodeType?: T;
-  barcodeData?: T;
-  metadata?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,5 +1,7 @@
 import type { CollectionConfig } from "payload";
 
+import barcodeScannerField from "@/app/(frontend)/fields/barcode-scanner";
+
 export const Assets: CollectionConfig = {
   slug: "assets",
   admin: {
@@ -65,13 +67,8 @@ export const Assets: CollectionConfig = {
           label: "MAC address",
           type: "text",
           required: false,
-          validate: (val: string) => {
-            const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
-            return macRegex.test(val)
-              ? true
-              : "Invalid MAC address format (e.g. 00:1A:2B:3C:4D:5E)";
-          },
         },
+        barcodeScannerField,
       ],
     },
     {

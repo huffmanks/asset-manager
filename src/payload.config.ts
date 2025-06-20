@@ -8,7 +8,6 @@ import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { Assets } from "./collections/Assets";
-import { Barcodes } from "./collections/Barcodes";
 import { Locations } from "./collections/Locations";
 import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
@@ -23,7 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Assets, Barcodes, Locations, Media, Users],
+  collections: [Assets, Locations, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
